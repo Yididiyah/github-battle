@@ -61,7 +61,7 @@ export function battle (players) {
       getUserData(players[0]),
       getUserData(players[1])
     ]).then((results) => sortPlayers(results))
-  }
+}
 
 
 export function fetchPopularRepos(language){
