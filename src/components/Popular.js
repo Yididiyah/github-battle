@@ -33,7 +33,7 @@ function ReposGrid({ repos }){
     return (
         <ul className='grid space-around' >
             {repos.map((repo, index) => {
-                const { name, owner, html_url, stargazers_count, forks, open_issues } = repo
+                const { owner, html_url, stargazers_count, forks, open_issues } = repo
                 const { login, avatar_url } = owner
 
                 return (
@@ -82,7 +82,7 @@ function Popular(){
     const [repos, setRepos] = React.useState({})
     const [error, setError] = React.useState(null)
 
-    function updateLanguage(selectedLanguage){
+    const updateLanguage = React.useCallback((selectedLanguage) => {
         setSelectedLanguage(selectedLanguage)
         setError(null)
    
@@ -99,10 +99,10 @@ function Popular(){
                  setError('There was an error fetching the repositories')
              })
         }
-    }
+    }, [repos])
     React.useEffect(() => {
         updateLanguage(selectedLanguage)
-    },[])
+    },[updateLanguage, selectedLanguage])
    function isLoading(){
        return !repos[selectedLanguage] && error === null
    }
